@@ -7,7 +7,7 @@ import theme from "../../styles/theme";
 
 class Component extends React.PureComponent {
     render() {
-        const {title, iconName, iconType, onClick, disabled} = this.props;
+        const {title, iconName, iconType, onClick, disabled,style} = this.props;
         return (
             <Button
                 icon={
@@ -21,7 +21,7 @@ class Component extends React.PureComponent {
                 iconRight
                 title={title.toUpperCase()}
                 titleStyle={styles.titleStyle}
-                containerStyle={styles.containerStyle}
+                containerStyle={[styles.containerStyle,style]}
                 buttonStyle={styles.buttonStyle}
                 onPress={onClick}
                 disabled={disabled}
@@ -35,6 +35,7 @@ Component.propTypes = {
     iconType: PropTypes.string,
     onClick: PropTypes.func,
     disabled: PropTypes.bool,
+    style: PropTypes.any,
 };
 
 Component.defaultProps = {
@@ -44,6 +45,7 @@ Component.defaultProps = {
     onClick: () => {
     },
     disabled: false,
+    style: {},
 };
 
 export default Component;

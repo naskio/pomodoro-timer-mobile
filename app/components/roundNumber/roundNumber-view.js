@@ -7,12 +7,26 @@ import styles from './roundNumber-styles';
 import theme from "../../styles/theme";
 
 class Component extends React.PureComponent {
+
+    constructor(props) {
+        super(props);
+        const {value} = props;
+        this.state = {value};
+    }
+
     render() {
-        const {style, value, onValueChange} = this.props;
+        const {style, onValueChange} = this.props;
+        const {value} = this.state;
         return (<View style={[styles.container, style]}>
                 <TouchableOpacity
                     style={styles.iconContainer}
-                    onPress={() => onValueChange(value - 1)}
+                    onPress={
+                        () => {
+                            this.setState({value: value - 1});
+                            onValueChange(value - 1);
+                        }
+                    }
+                    disabled={value<=1}
                 >
                     <Icon
                         name='remove'
@@ -24,8 +38,10 @@ class Component extends React.PureComponent {
                 <Text style={styles.text}>{value}</Text>
                 <TouchableOpacity
                     style={styles.iconContainer}
-                    // disabled={!onValueChange}
-                    onPress={() => onValueChange(value + 1)}
+                    onPress={() => {
+                        this.setState({value: value + 1});
+                        onValueChange(value + 1);
+                    }}
                 >
                     <Icon
                         name='add'

@@ -8,7 +8,7 @@ class Component extends React.PureComponent {
         const {value, onValueChange, style} = this.props;
         return (<TextInput
             placeholder={'What is Your task ? …'}
-            value={value}
+            defaultValue={value}
             onValueChange={onValueChange}
             style={[styles.input, style]}
             multiline={true}

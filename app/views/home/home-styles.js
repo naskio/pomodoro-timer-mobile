@@ -1,4 +1,4 @@
-import {Dimensions, Platform, StyleSheet} from "react-native";
+import {StyleSheet} from "react-native";
 import theme from '../../styles/theme';
 
 export default StyleSheet.create({
@@ -29,4 +29,11 @@ export default StyleSheet.create({
         fontWeight: theme.FONT_WEIGHT.REGULAR,
         fontFamily: theme.FONT_FAMILY,
     },
+    counter: {
+        color: theme.COLORS.TEXT,
+        fontSize: 96,
+        fontWeight: theme.FONT_WEIGHT.REGULAR,
+        fontFamily: theme.FONT_FAMILY,
+        marginBottom: 24,
+    }
 });
