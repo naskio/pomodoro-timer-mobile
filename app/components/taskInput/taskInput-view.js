@@ -1,21 +1,33 @@
-import React, {Fragment} from "react";
-import {View} from "react-native";
+import React from "react";
+import {TextInput} from "react-native";
 import PropTypes from "prop-types";
+import styles from "./taskInput-styles";
 
 class Component extends React.PureComponent {
     render() {
-        return (<Fragment/>)
+        const {value, onValueChange, style} = this.props;
+        return (<TextInput
+            placeholder={'What is Your task ? …'}
+            value={value}
+            onValueChange={onValueChange}
+            style={[styles.input, style]}
+            multiline={true}
+            numberOfLines={2}
+            underlineColorAndroid='transparent'
+        />);
     }
 }
 
 Component.propTypes = {
-    navigation: PropTypes.any.isRequired,
-    right: PropTypes.any,
-    title: PropTypes.string,
+    onValueChange: PropTypes.func,
+    value: PropTypes.string,
+    style: PropTypes.any,
 };
 
 Component.defaultProps = {
-    title: '',
+    onValueChange: (newV) => console.log(newV),
+    value: '',
+    style: {},
 };
 
 export default Component;

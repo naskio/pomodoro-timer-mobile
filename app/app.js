@@ -3,6 +3,7 @@ import {
     SafeAreaView,
     ScrollView,
     StatusBar,
+    Dimensions
 } from 'react-native';
 
 import Home from './views/home';
