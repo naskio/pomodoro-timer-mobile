@@ -21,7 +21,7 @@ export default {
         LIGHT: '200',
         REGULAR: '400',
         MEDIUM: '600',
-        BOLD: '800',
+        BOLD: 'bold',
         BLACK: '900',
-    },
+    }
 };
