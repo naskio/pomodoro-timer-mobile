@@ -13,13 +13,18 @@ class Component extends React.PureComponent {
         const {
             step,
             numberOfRounds,
-            roundNumber,
             remaining,
             isPaused,
             title,
             subtitle,
             taskDescription,
-            setState,
+            taskValueChange,
+            roundsNumberValueChange,
+            nextOnPress,
+            startOnPress,
+            pauseOnPress,
+            resumeOnPress,
+            stopOnPress,
         } = this.props;
 
         return <View style={styles.container}>
@@ -39,29 +44,21 @@ class Component extends React.PureComponent {
                 step === 1 && <Fragment>
                     <TaskInput style={{marginVertical: 24}}
                                value={taskDescription}
-                               onValueChange={(value) => setState({taskDescription: value})}
+                               onValueChange={taskValueChange}
                     />
                     <RedButton title='next' iconName='skip-next' iconType='material'
-                               onClick={() => {
-                                   setState({step: 2, title: 'Number of rounds'});
-                               }}/>
+                               onClick={nextOnPress}/>
                 </Fragment>
             }
             {
                 step === 2 && <Fragment>
                     <RoundNumber style={{marginBottom: 24}}
                                  value={numberOfRounds}
-                                 onValueChange={(value) => setState({numberOfRounds: value})}
+                                 onValueChange={roundsNumberValueChange}
                     />
 
                     <RedButton title='start' iconName='play-arrow' iconType='material'
-                               onClick={() => {
-                                   setState({
-                                       step: 3,
-                                       title: `Round ${roundNumber}`,
-                                       subtitle: taskDescription || 'Your task...'
-                                   });
-                               }}/>
+                               onClick={startOnPress}/>
                 </Fragment>
             }
             {
@@ -71,25 +68,13 @@ class Component extends React.PureComponent {
                         isPaused ?
                             <View style={{flexDirection: 'row', justifyContent: 'center', alignSelf: 'stretch'}}>
                                 <OutlineButton title='resume' iconName='play-arrow' iconType='material'
-                                               onClick={() => {
-                                                   setState({
-                                                       isPaused: false,
-                                                   });
-                                               }}/>
+                                               onClick={resumeOnPress}/>
                                 <RedButton style={{marginLeft: 32,}} title='stop' iconName='stop' iconType='material'
-                                           onClick={() => {
-                                               setState({
-                                                   step: 1,
-                                               });
-                                           }}/>
+                                           onClick={stopOnPress}/>
                             </View>
                             :
                             <RedButton title='PAUSE' iconName='pause' iconType='material'
-                                       onClick={() => {
-                                           setState({
-                                               isPaused: true,
-                                           });
-                                       }}/>
+                                       onClick={pauseOnPress}/>
                     }
                 </Fragment>
             }
@@ -97,16 +82,9 @@ class Component extends React.PureComponent {
                 step === 4 && <Fragment>
                     <Text style={styles.counter}>{'00:00'}</Text>
                     <RedButton title='restart' iconName='play-arrow' iconType='material'
-                               onClick={() => {
-                                   setState({
-                                       step: 1,
-                                   });
-                               }}/>
+                               onClick={stopOnPress}/>
                 </Fragment>
             }
-            {/*<RedButton title='play' iconName='play-arrow' iconType='material'/>*/}
-
-            {/*<OutlineButton title='play' iconName='play-arrow' iconType='material'/>*/}
         </View>
     }
 }
@@ -114,20 +92,24 @@ class Component extends React.PureComponent {
 Component.propTypes = {
     step: PropTypes.number,
     numberOfRounds: PropTypes.number,
-    roundNumber: PropTypes.number,
     remaining: PropTypes.number,
     isPaused: PropTypes.bool,
     title: PropTypes.string,
     subtitle: PropTypes.string,
     taskDescription: PropTypes.string,
-    setState: PropTypes.func.isRequired,
+    taskValueChange: PropTypes.func.isRequired,
+    roundsNumberValueChange: PropTypes.func.isRequired,
+    nextOnPress: PropTypes.func.isRequired,
+    startOnPress: PropTypes.func.isRequired,
+    pauseOnPress: PropTypes.func.isRequired,
+    resumeOnPress: PropTypes.func.isRequired,
+    stopOnPress: PropTypes.func.isRequired,
 };
 
 Component.defaultProps = {
     step: 1,
-    numberOfRounds: 4,
-    roundNumber: 1,
-    remaining: 1500,
+    numberOfRounds: 1,
+    remaining: 1,
     isPaused: false,
     title: '',
     subtitle: '',
