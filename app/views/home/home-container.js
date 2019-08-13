@@ -2,7 +2,7 @@ import React from "react";
 import {Vibration} from 'react-native';
 import {speak, initTts} from "../../utils/tts";
 import View from "./home-view";
-import {TaskTimer} from 'tasktimer';
+import Timer from '../../utils/timer';
 import {DEFAULT_BREAK_TIME, DEFAULT_ROUND_TIME, DEFAULT_ROUNDS, DEFAULT_TASK} from "../../config/config";
 
 
@@ -22,12 +22,15 @@ class Component extends React.Component {
     constructor(props) {
         super(props);
         this.state = initialState;
-        this.timer = new TaskTimer(1000);
-        this.timer.on('tick', this.secondAction);
+        this.timer = new Timer(1000, this.secondAction);
     }
 
     componentDidMount() {
         initTts();
+    }
+
+    componentWillUnmount() {
+        this.timer.stop();
     }
 
     taskValueChange = (value) => {
@@ -61,13 +64,13 @@ class Component extends React.Component {
         this.setState({
             isPaused: true,
         });
-        this.timer.pause();
+        this.timer.stop();
     };
     resumeOnPress = () => {
         this.setState({
             isPaused: false,
         });
-        this.timer.resume();
+        this.timer.start();
     };
     stopOnPress = () => {
         this.setState(initialState);

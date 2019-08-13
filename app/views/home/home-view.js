@@ -6,7 +6,7 @@ import OutlineButton from '../../components/outlineButton';
 import RedButton from '../../components/redButton';
 import TaskInput from '../../components/taskInput';
 import RoundNumber from '../../components/roundNumber';
-import {toMMSS} from "../../utils/time";
+import {toMMSS} from "../../utils/formatter";
 
 class Component extends React.PureComponent {
     render() {
