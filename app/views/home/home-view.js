@@ -47,18 +47,22 @@ class Component extends React.PureComponent {
                                onValueChange={taskValueChange}
                     />
                     <RedButton title='next' iconName='skip-next' iconType='material'
-                               onClick={nextOnPress}/>
+                               onClick={nextOnPress}
+                               style={{marginBottom: 32}}
+                    />
                 </Fragment>
             }
             {
                 step === 2 && <Fragment>
-                    <RoundNumber style={{marginBottom: 24}}
+                    <RoundNumber style={{marginBottom: 8}}
                                  value={numberOfRounds}
                                  onValueChange={roundsNumberValueChange}
                     />
 
                     <RedButton title='start' iconName='play-arrow' iconType='material'
-                               onClick={startOnPress}/>
+                               onClick={startOnPress}
+                               style={{marginBottom: 32}}
+                    />
                 </Fragment>
             }
             {
@@ -66,15 +70,19 @@ class Component extends React.PureComponent {
                     <Text style={styles.counter}>{toMMSS(remaining)}</Text>
                     {
                         isPaused ?
-                            <View style={{flexDirection: 'row', justifyContent: 'center', alignSelf: 'stretch'}}>
+                            <View style={
+                                {flexDirection: 'row', justifyContent: 'center', alignSelf: 'stretch',marginBottom: 32}
+                            }>
                                 <OutlineButton title='resume' iconName='play-arrow' iconType='material'
                                                onClick={resumeOnPress}/>
-                                <RedButton style={{marginLeft: 32,}} title='stop' iconName='stop' iconType='material'
+                                <RedButton style={{marginLeft: 16,}} title='stop' iconName='stop' iconType='material'
                                            onClick={stopOnPress}/>
                             </View>
                             :
                             <RedButton title='PAUSE' iconName='pause' iconType='material'
-                                       onClick={pauseOnPress}/>
+                                       onClick={pauseOnPress}
+                                       style={{marginBottom: 32}}
+                            />
                     }
                 </Fragment>
             }
@@ -82,7 +90,9 @@ class Component extends React.PureComponent {
                 step === 4 && <Fragment>
                     <Text style={styles.counter}>{'00:00'}</Text>
                     <RedButton title='restart' iconName='play-arrow' iconType='material'
-                               onClick={stopOnPress}/>
+                               onClick={stopOnPress}
+                               style={{marginBottom: 32}}
+                    />
                 </Fragment>
             }
         </View>

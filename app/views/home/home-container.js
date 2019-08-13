@@ -1,4 +1,6 @@
 import React from "react";
+import {Vibration} from 'react-native';
+import Tts from 'react-native-tts';
 import View from "./home-view";
 import {TaskTimer} from 'tasktimer';
 import {DEFAULT_BREAK_TIME, DEFAULT_ROUND_TIME, DEFAULT_ROUNDS, DEFAULT_TASK} from "../../config/config";
@@ -16,12 +18,24 @@ const initialState = {
     taskDescription: DEFAULT_TASK,
 };
 
+const speak = (message) => Tts.speak(message);
+
 class Component extends React.Component {
     constructor(props) {
         super(props);
         this.state = initialState;
         this.timer = new TaskTimer(1000);
         this.timer.on('tick', this.secondAction);
+    }
+
+    componentDidMount() {
+        Tts.getInitStatus().then(() => {
+            Tts.setDefaultLanguage('en-US');
+        }, (err) => {
+            if (err.code === 'no_engine') {
+                Tts.requestInstallEngine();
+            }
+        });
     }
 
     taskValueChange = (value) => {
@@ -48,6 +62,8 @@ class Component extends React.Component {
             subtitle: taskDescription,
         });
         this.timer.start();
+        speak('Start working');
+        Vibration.vibrate();
     };
     pauseOnPress = () => {
         this.setState({
@@ -76,6 +92,7 @@ class Component extends React.Component {
         const newRemaining = remaining - 1;
         if (newRemaining <= 0) {
             if (isBreak) {
+                // end of the break, start of a new round
                 this.setState({
                     isBreak: false,
                     roundNumber: roundNumber + 1,
@@ -83,17 +100,25 @@ class Component extends React.Component {
                     title: `Round ${roundNumber + 1}`,
                     subtitle: taskDescription,
                 });
+                speak(`Round ${roundNumber + 1} has started`);
+                Vibration.vibrate();
             } else {
                 if (roundNumber >= numberOfRounds) {
+                    // the end of all rounds
                     this.setState({remaining: 0, step: 4, title: 'Congratulations!', subtitle: 'You have finished'});
                     this.timer.stop();
+                    speak('Congratulations, you have finished');
+                    Vibration.vibrate();
                 } else {
+                    // start of a break, end of a round
                     this.setState({
                         isBreak: true,
                         remaining: DEFAULT_BREAK_TIME,
                         title: 'Take a break',
                         subtitle: '',
                     });
+                    speak('Take a break');
+                    Vibration.vibrate();
                 }
             }
         } else {

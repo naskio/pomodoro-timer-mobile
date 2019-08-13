@@ -34,6 +34,6 @@ export default StyleSheet.create({
         fontSize: 96,
         fontWeight: theme.FONT_WEIGHT.REGULAR,
         fontFamily: theme.FONT_FAMILY,
-        marginBottom: 24,
+        marginBottom: 8,
     }
 });
