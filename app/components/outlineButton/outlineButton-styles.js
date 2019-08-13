@@ -7,7 +7,7 @@ export default StyleSheet.create({
         borderRadius: 16,
         borderColor: theme.COLORS.PRIMARY_DARK,
         paddingHorizontal: 16,
-        paddingVertical: 8,
+        paddingVertical: 4,
     },
     titleStyle: {
         color: theme.COLORS.PRIMARY_DARK,

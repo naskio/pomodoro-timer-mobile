@@ -1,4 +1,4 @@
-import {StyleSheet} from "react-native";
+import {StyleSheet,Platform} from "react-native";
 import theme from '../../styles/theme';
 
 export default StyleSheet.create({
@@ -10,5 +10,11 @@ export default StyleSheet.create({
         borderWidth: 2,
         borderColor: theme.COLORS.TEXT,
         borderRadius: 16,
+        ...Platform.select({
+            ios: {
+                minHeight: 104,
+                paddingTop: 16,
+            },
+        }),
     },
-});
+})

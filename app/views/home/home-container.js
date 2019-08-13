@@ -1,6 +1,6 @@
 import React from "react";
 import {Vibration} from 'react-native';
-import Tts from 'react-native-tts';
+import {speak, initTts} from "../../utils/tts";
 import View from "./home-view";
 import {TaskTimer} from 'tasktimer';
 import {DEFAULT_BREAK_TIME, DEFAULT_ROUND_TIME, DEFAULT_ROUNDS, DEFAULT_TASK} from "../../config/config";
@@ -18,8 +18,6 @@ const initialState = {
     taskDescription: DEFAULT_TASK,
 };
 
-const speak = (message) => Tts.speak(message);
-
 class Component extends React.Component {
     constructor(props) {
         super(props);
@@ -29,13 +27,7 @@ class Component extends React.Component {
     }
 
     componentDidMount() {
-        Tts.getInitStatus().then(() => {
-            Tts.setDefaultLanguage('en-US');
-        }, (err) => {
-            if (err.code === 'no_engine') {
-                Tts.requestInstallEngine();
-            }
-        });
+        initTts();
     }
 
     taskValueChange = (value) => {

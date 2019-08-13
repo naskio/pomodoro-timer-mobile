@@ -71,7 +71,13 @@ class Component extends React.PureComponent {
                     {
                         isPaused ?
                             <View style={
-                                {flexDirection: 'row', justifyContent: 'center', alignSelf: 'stretch',marginBottom: 32}
+                                {
+                                    flexDirection: 'row',
+                                    justifyContent: 'center',
+                                    alignItems: 'center',
+                                    alignSelf: 'stretch',
+                                    marginBottom: 32
+                                }
                             }>
                                 <OutlineButton title='resume' iconName='play-arrow' iconType='material'
                                                onClick={resumeOnPress}/>

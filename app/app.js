@@ -3,6 +3,7 @@ import {
     SafeAreaView,
     ScrollView,
     StatusBar,
+    Platform
 } from 'react-native';
 
 import Home from './views/home';
@@ -13,7 +14,10 @@ class App extends React.Component {
     render() {
         return (
             <Fragment>
-                <StatusBar backgroundColor={theme.COLORS.PRIMARY} barStyle="dark-content"/>
+                <StatusBar backgroundColor={theme.COLORS.PRIMARY} barStyle={Platform.select({
+                    android: "light-content",
+                    ios: "dark-content",
+                })}/>
                 <SafeAreaView>
                     <ScrollView contentInsetAdjustmentBehavior="automatic"
                                 ref={ref => this.scrollView = ref}
