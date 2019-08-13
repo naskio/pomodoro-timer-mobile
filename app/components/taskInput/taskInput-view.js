@@ -12,6 +12,7 @@ class Component extends React.PureComponent {
             onChangeText={onValueChange}
             style={[styles.input, style]}
             multiline={true}
+            autoFocus={true}
             numberOfLines={2}
             underlineColorAndroid='transparent'
         />);
