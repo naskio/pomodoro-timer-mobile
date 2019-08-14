@@ -29,9 +29,9 @@ class Component extends React.Component {
         initTts();
     }
 
-    componentWillUnmount() {
-        this.timer.stop();
-    }
+    // componentWillUnmount() {
+    //     this.timer.stop();
+    // }
 
     taskValueChange = (value) => {
         this.setState({taskDescription: value});

@@ -34,6 +34,8 @@ target 'PomodoroTimer' do
 
   pod 'TextToSpeech', :path => '../node_modules/react-native-tts'
 
+  pod 'react-native-background-timer', :path => '../node_modules/react-native-background-timer'
+
   target 'PomodoroTimerTests' do
     inherit! :search_paths
     # Pods for testing
